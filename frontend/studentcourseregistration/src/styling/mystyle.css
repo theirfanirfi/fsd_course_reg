@@ -1,0 +1,8 @@
+.div {
+    background-color: black;
+    color: white;
+        margin:16px;
+        display: 'flex';
+        flex-direction: 'row';
+        justify-content: 'space-between';
+}
