@@ -1,11 +1,16 @@
-import {useState, useEffect} from 'react'
-
+import {useState, useEffect, useContext} from 'react'
+import { AuthContext } from '../App'
 const StudentPage = () => {
     const [students, setStudents] = useState([])
+    const authContext = useContext(AuthContext)
 
     const get_all_students = () => {
         let URL = "http://localhost:5000/api/students/"
-        fetch(URL)
+        fetch(URL, {
+            headers: {
+                "Authorization": localStorage.getItem('email')
+            }
+        })
         .then(response => response.json())
         .then(response => {
             setStudents(response.data);
@@ -14,6 +19,7 @@ const StudentPage = () => {
 
     useEffect(()=>{
         get_all_students()
+        // console.log('context',authContext);
     },[])
 
     const delete_student = (student) => {

@@ -30,11 +30,13 @@ course_router.delete('/:id', (req, res, next) => {
         courses.splice(index, 1)
 
         res.status(200).json({
-            course: course,
-            message: "Courses deleted."
+            isDeleted: true,
+            courses: courses,
+            message: "Course deleted."
         })
     }else {
         res.status(404).json({
+            isDeleted: false,
             message: "course with this id not found"
         })
     }

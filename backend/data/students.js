@@ -1,6 +1,6 @@
 const students = [
 
-    {"id":1,"first_name":"Alvira","last_name":"Bowness","email":"abowness0@devhub.com","gender":"Female"},
+{"id":1,"first_name":"Alvira","last_name":"Bowness","email":"abowness0@devhub.com","gender":"Female"},
 {"id":2,"first_name":"Noll","last_name":"Payn","email":"npayn1@ezinearticles.com","gender":"Male"},
 {"id":3,"first_name":"Claudius","last_name":"O'Moylane","email":"comoylane2@mail.ru","gender":"Male"},
 {"id":4,"first_name":"Car","last_name":"Boulde","email":"cboulde3@ning.com","gender":"Male"},
