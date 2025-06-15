@@ -8,7 +8,7 @@ const StudentPage = () => {
         let URL = "http://localhost:5000/api/students/"
         fetch(URL, {
             headers: {
-                "Authorization": localStorage.getItem('email')
+                "Authorization": localStorage.getItem('token')
             }
         })
         .then(response => response.json())
@@ -23,9 +23,12 @@ const StudentPage = () => {
     },[])
 
     const delete_student = (student) => {
-        let URL = `http://localhost:5000/api/students/${student.id}`
+        let URL = `http://localhost:5000/api/students/${student._id}`
         fetch(URL, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                "Authorization": localStorage.getItem('token')
+            }
         })
         .then(response => response.json())
         .then(response => {

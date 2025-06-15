@@ -21,6 +21,7 @@ const AddStudentPage = () => {
             body: JSON.stringify(student),
             headers: {
                 'content-type': 'application/json',
+                "Authorization": localStorage.getItem('token')
             }
         })
         .then(response => response.json())

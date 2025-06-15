@@ -3,6 +3,9 @@ const enrollment_router= express.Router();
 import enrollments from "../data/enrollments.js";
 import students from "../data/students.js";
 import courses from "../data/courses.js";
+import AuthWare from "../middlewares/AuthWare.js";
+
+enrollment_router.use(AuthWare)
 
 enrollment_router.get('/', (req, res, next)=>{
     res.status(200).json(

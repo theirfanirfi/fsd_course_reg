@@ -1,8 +1,10 @@
 import express from "express";
 const course_router = express.Router();
 import courses from "../data/courses.js";
+import AuthWare from "../middlewares/AuthWare.js";
 
 
+course_router.use(AuthWare)
 course_router.get('/', (request, response, next) => {
     response.status(200).json({
         data: courses

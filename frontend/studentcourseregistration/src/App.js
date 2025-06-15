@@ -15,7 +15,7 @@ function App() {
   const [login, setLogin] = useState(false);
 
   useEffect(()=>{
-    let email = localStorage.getItem('email');
+    let email = localStorage.getItem('token');
     if(email != null){
       setLogin(true);
     }

@@ -5,7 +5,11 @@ const CoursePage = () => {
 
     const get_all_courses = () => {
         let URL = "http://localhost:5000/api/courses/"
-        fetch(URL)
+        fetch(URL, {
+            headers: {
+                "Authorization": localStorage.getItem('token')
+            }
+        })
         .then(response => response.json())
         .then(response => {
             setCourses(response.data);
@@ -19,7 +23,10 @@ const CoursePage = () => {
     const delete_course = (course) => {
         let URL = `http://localhost:5000/api/courses/${course.id}`
         fetch(URL, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                "Authorization": localStorage.getItem('token')
+            }
         })
         .then(response => response.json())
         .then(response => {

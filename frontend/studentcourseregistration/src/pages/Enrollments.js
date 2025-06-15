@@ -4,7 +4,11 @@ const [enrollments, setEnrollments] = useState([])
 
 const fetch_enrollments = () => {
     let URL = "http://localhost:5000/api/enrollments"
-    fetch(URL)
+    fetch(URL, {
+        headers: {
+            "Authorization": localStorage.getItem('token')
+        }
+    })
     .then(res => res.json())
     .then(res => {
         setEnrollments(res.enrollments);
@@ -13,7 +17,12 @@ const fetch_enrollments = () => {
 
 const deleteEnrollment =(enrollment) => {
     let URL =`http://localhost:5000/api/enrollments/${enrollment.id}`
-    fetch(URL, {method: "delete"})
+    fetch(URL, {
+        method: "delete",
+        headers: {
+            "Authorization": localStorage.getItem('token')
+        }
+    })
     .then(res => res.json())
     .then(res => {
         if(res.isDeleted){

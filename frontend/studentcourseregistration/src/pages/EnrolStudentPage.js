@@ -13,7 +13,8 @@ const EnrolStudentPage = () => {
         fetch(URL, {method: "POST",
             body: JSON.stringify(enrollment),
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                "Authorization": localStorage.getItem('token')
             }
         }).then(res => res.json())
         .then(res => {
@@ -26,10 +27,18 @@ const EnrolStudentPage = () => {
         let URL = "http://localhost:5000/api/students"
         let URL1 = "http://localhost:5000/api/courses"
 
-        let response_student = await fetch(URL)
+        let response_student = await fetch(URL, {
+            headers: {
+                "Authorization": localStorage.getItem('token')
+            }
+        })
         response_student = await response_student.json()
 
-        let response_course = await fetch(URL1)
+        let response_course = await fetch(URL1, {
+            headers: {
+                "Authorization": localStorage.getItem('token')
+            }
+        })
         response_course = await response_course.json()
         console.log(response_student.data)
         console.log(response_course.data)
