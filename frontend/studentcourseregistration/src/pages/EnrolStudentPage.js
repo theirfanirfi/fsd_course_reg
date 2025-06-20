@@ -1,8 +1,10 @@
 import {useState, useEffect} from 'react'
 import style from "../styling/StudentFormStyle";
+import { useSelector } from 'react-redux';
 const EnrolStudentPage = () => {
-    const [students, setStudents] = useState([]);
-    const [courses, setCourses] = useState([]);
+    const students = useSelector((state)=> state.studentReducer.students);
+    const courses = useSelector((state) => state.courseReducer.courses);
+    
     const [enrollment, setEnrollment] = useState({
         course_id: '',
         student_id: '',
@@ -23,31 +25,8 @@ const EnrolStudentPage = () => {
     }
 
 
-    const fetch_students_courses = async () => {
-        let URL = "http://localhost:5000/api/students"
-        let URL1 = "http://localhost:5000/api/courses"
-
-        let response_student = await fetch(URL, {
-            headers: {
-                "Authorization": localStorage.getItem('token')
-            }
-        })
-        response_student = await response_student.json()
-
-        let response_course = await fetch(URL1, {
-            headers: {
-                "Authorization": localStorage.getItem('token')
-            }
-        })
-        response_course = await response_course.json()
-        console.log(response_student.data)
-        console.log(response_course.data)
-        setStudents(response_student.data)
-        setCourses(response_course.data)
-    }
 
     useEffect(()=>{
-        fetch_students_courses();
     }, [null])
 
 

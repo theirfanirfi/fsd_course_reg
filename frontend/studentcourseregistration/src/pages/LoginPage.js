@@ -1,6 +1,7 @@
-import { AuthContext } from '../App';
 import {useState, useContext} from 'react';
 import {useNavigate} from 'react-router-dom'
+import { storeLogin } from '../store/AuthSlice';
+import { useDispatch } from 'react-redux';
 
 
 const LoginPage = () => {
@@ -8,7 +9,7 @@ const LoginPage = () => {
         email: '',
         password: '',
     })
-    const authContext = useContext(AuthContext)
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     // const 
@@ -26,7 +27,7 @@ const LoginPage = () => {
          .then(res => {
             if(res.isLoggedIn){
                 localStorage.setItem('token',res.token)
-                authContext.setLogin(true)
+                dispatch(storeLogin(true));
                 navigate("/students")
             }else {
                 alert("invalid credentials")

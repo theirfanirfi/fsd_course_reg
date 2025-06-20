@@ -1,9 +1,10 @@
 import {useState, useEffect, useContext} from 'react'
-import { AuthContext } from '../App'
+import { useSelector, useDispatch } from 'react-redux'
+import { storeStudents } from '../store/StudentsSlice'
 const StudentPage = () => {
-    const [students, setStudents] = useState([])
-    const authContext = useContext(AuthContext)
-
+    const dispatch = useDispatch()
+    const students = useSelector((state) => state.studentReducer.students)
+    // console.log('students redux', stds);
     const get_all_students = () => {
         let URL = "http://localhost:5000/api/students/"
         fetch(URL, {
@@ -13,7 +14,8 @@ const StudentPage = () => {
         })
         .then(response => response.json())
         .then(response => {
-            setStudents(response.data);
+            dispatch(storeStudents(response.data))
+            // setStudents(response.data);
         })
     }
 
@@ -33,7 +35,7 @@ const StudentPage = () => {
         .then(response => response.json())
         .then(response => {
             if(response.isDeleted){
-                setStudents(response.students)
+                // setStudents(response.students)
             }else {
                 alert("Student could not be deleted at the moment.");
             }

@@ -1,8 +1,10 @@
 import {useState, useEffect} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { storeCourses } from '../store/CourseSlice'
 
 const CoursePage = () => {
-    const [courses, setCourses] = useState([])
-
+    const courses = useSelector((state) => state.courseReducer.courses)
+    const dispatch = useDispatch();
     const get_all_courses = () => {
         let URL = "http://localhost:5000/api/courses/"
         fetch(URL, {
@@ -12,7 +14,8 @@ const CoursePage = () => {
         })
         .then(response => response.json())
         .then(response => {
-            setCourses(response.data);
+            // setCourses(response.data);
+            dispatch(storeCourses(response.data));
         })
     }
 
@@ -31,7 +34,7 @@ const CoursePage = () => {
         .then(response => response.json())
         .then(response => {
             if(response.isDeleted){
-                setCourses(response.courses)
+                // setCourses(response.courses)
             }else {
                 alert("Course could not be deleted at the moment.");
             }

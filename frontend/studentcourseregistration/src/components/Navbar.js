@@ -1,9 +1,10 @@
-import {useContext} from 'react'
-import { AuthContext } from "../App"
 import { Link, useNavigate } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux";
+import { storeLogin } from "../store/AuthSlice";
 const Navbar = () => {
     const navigate = useNavigate()
-    const authContext = useContext(AuthContext);
+    const dispatch = useDispatch();
+    const login = useSelector((state) => state.authReducer.login)
 
     return (
         <ul>
@@ -14,7 +15,7 @@ const Navbar = () => {
             <li><Link to="/enrollments">Enrollments</Link></li>
             <li><button onClick={()=>{
                 localStorage.clear()
-                authContext.setLogin(false)
+                dispatch(storeLogin(false));
              navigate("/login");
 
             }}>Logout</button></li>

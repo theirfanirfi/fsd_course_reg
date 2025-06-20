@@ -7,17 +7,20 @@ import CoursePage from './pages/CoursePage';
 import EnrolStudentPage from './pages/EnrolStudentPage';
 import Enrollments from './pages/Enrollments';
 import LoginPage from './pages/LoginPage';
+import { useSelector, useDispatch } from 'react-redux';
+import { storeLogin } from './store/AuthSlice';
 
-const AuthContext = createContext();
+// const AuthContext = createContext();
 
 
 function App() {
-  const [login, setLogin] = useState(false);
+  const dispatch = useDispatch();
+  const login = useSelector((state) => state.authReducer.login)
 
   useEffect(()=>{
     let email = localStorage.getItem('token');
     if(email != null){
-      setLogin(true);
+      dispatch(storeLogin(true));
     }
   },[login])
 
@@ -25,8 +28,6 @@ function App() {
 
   return (
     <BrowserRouter>
-    <AuthContext.Provider value={{login: login, setLogin: setLogin}}>
-      <>
     {login && <Navbar/> }
       <Routes>
         {login ? (
@@ -42,11 +43,8 @@ function App() {
         )}
  
       </Routes>
-      </>
-      </AuthContext.Provider>
     </BrowserRouter>
   );
 
 }
-export {AuthContext};
 export default App;
